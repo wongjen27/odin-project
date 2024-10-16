@@ -1,57 +1,108 @@
 
-// COMPUTER CHOICE //
+//**************** COMPUTER CHOICE ****************//
 
-let getComputerChoice = () => {
-    let choice = getRandomIntInclusive(0,2);
-    if (choice === 0) {
-        return "Rock"
-    } else if (choice === 1) {
-        return "Paper"
-    } else {
-        return "Sissors"
-    }
-}
-
-console.log(getComputerChoice())
-
-
+// 0. generate random integers
 function getRandomIntInclusive(min, max) {
     const minCeiled = Math.ceil(min);
     const maxFloored = Math.floor(max);
     return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled); // The maximum is inclusive and the minimum is inclusive
-  }
+}
 
+// 1. each integer correspond with r, p or sc
+let getComputerChoice = () => {
+    let choice = getRandomIntInclusive(0,2);
+    if (choice === 0) {
+        return "rock"
+    } else if (choice === 1) {
+        return "paper"
+    } else {
+        return "scissors"
+    }
+}
 
-// GET HUMAN CHOICE //
+//**************** GET HUMAN CHOICE ****************//
+
+// 2. use prompt to generate ask for r, p or sc
 
 function getHumanChoice() {
     let choice = prompt("Rock, paper, or scissors?");
     choice = choice.toLowerCase();
     if (choice === "rock") {
-        return "Rock"
+        return "rock"
     } else if (choice === "paper") {
-        return "Paper "
+        return "paper"
     } else if (choice === "scissors") {
-        return "Scissors"
+        return "scissors"
     }
 }
 
-console.log(getHumanChoice())
 
-// SCORE KEEPING //
+//**************** SCORE KEEPING ****************//
 
 let humanScore = 0;
 let computerScore = 0;
 
-function playRound(humanChoice, computerChoice) {
-    if (humanChoice === "Rock" && computerChoice === "Paper") {
-        humanScore = humanScore - 1;
-        computerScore = computerScore + 1;
-        return "You lose. Paper beats rock."
+function playRound(computerChoice, humanChoice) {
+    if (computerChoice === "rock") {
+        if (humanChoice === "rock") {
+            console.log("Rock and Rock. It is a tie.");
+        } else if (humanChoice === "paper") {
+            humanScore = humanScore + 1;
+            console.log("Paper beats Rock. You get a point!");
+        } else if (humanChoice === "scissors") {
+            computerScore = computerScore + 1;
+            console.log("Rock beats Scissors. Computer gets a point.")
+        } else { console.log("uh oh. computer rock")}
     }
+    if (computerChoice === "paper") {
+        if (humanChoice === "paper") {
+            console.log("Paper and Paper. It is a tie.");
+        } else if (humanChoice === "scissors") {
+            humanScore = humanScore + 1;
+            console.log("Scissors beats Paper. You get a point!");
+        } else if (humanChoice === "rock") {
+            computerScore = computerScore + 1;
+            console.log("Paper beats Rock. Computer gets a point.")
+        } else { console.log("uh oh. computer paper")}
+    }
+    if (computerChoice === "scissors") {
+        if (humanChoice === "scissors") {
+            console.log("Scissors and Scissors. It is a tie.");
+        } else if (humanChoice === "rock") {
+            humanScore = humanScore + 1;
+            console.log("Rock beats Scissors. You get a point!");
+        } else if (humanChoice === "paper") {
+            computerScore = computerScore + 1;
+            console.log("Scissors beats Paper. Computer gets a point.")
+        } else { console.log("uh oh. computer scissors")}
+    }
+
 }
 
 const humanSelection = getHumanChoice()
 const computerSelection = getComputerChoice()
 
-console.log(playRound(humanSelection, computerSelection))
+console.log(playRound(computerSelection, humanSelection))
+
+console.log("Human Score: " + humanScore)
+console.log("Computer Score: " + computerScore)
+
+
+
+
+// function test(computer, human) {
+//     if (computer === "Rock") {
+//         if (human === "Paper") {
+//             humanScore = humanScore + 1;
+//             return "Paper beats rock. You get a point!"
+//         }
+//     }
+// };
+
+// const computer = getComputerChoice
+
+// console.log(test("Rock", "Paper"))
+// console.log(humanScore)
+// console.log(test("Rock", "Paper"))
+// console.log(humanScore)
+// console.log(computerScore)
