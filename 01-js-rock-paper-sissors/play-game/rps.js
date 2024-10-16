@@ -49,34 +49,37 @@ function playRound(computerChoice, humanChoice) {
     if (computerChoice === "rock") {
         if (humanChoice === "rock") {
             console.log("Rock and Rock. It is a tie.");
+            return "tie"
         } else if (humanChoice === "paper") {
-            humanScore = humanScore + 1;
             console.log("Paper beats Rock. You get a point!");
+            return "human"
         } else if (humanChoice === "scissors") {
-            computerScore = computerScore + 1;
             console.log("Rock beats Scissors. Computer gets a point.")
+            return "computer"
         } else { console.log("uh oh. computer rock")}
     }
     if (computerChoice === "paper") {
         if (humanChoice === "paper") {
             console.log("Paper and Paper. It is a tie.");
+            return "tie"
         } else if (humanChoice === "scissors") {
-            humanScore = humanScore + 1;
             console.log("Scissors beats Paper. You get a point!");
+            return "human"
         } else if (humanChoice === "rock") {
-            computerScore = computerScore + 1;
             console.log("Paper beats Rock. Computer gets a point.")
+            return "computer"
         } else { console.log("uh oh. computer paper")}
     }
     if (computerChoice === "scissors") {
         if (humanChoice === "scissors") {
             console.log("Scissors and Scissors. It is a tie.");
+            return "tie"
         } else if (humanChoice === "rock") {
-            humanScore = humanScore + 1;
             console.log("Rock beats Scissors. You get a point!");
+            return "human"
         } else if (humanChoice === "paper") {
-            computerScore = computerScore + 1;
             console.log("Scissors beats Paper. Computer gets a point.")
+            return "computer"
         } else { console.log("uh oh. computer scissors")}
     }
 
@@ -87,7 +90,24 @@ function playRound(computerChoice, humanChoice) {
 const humanSelection = getHumanChoice()
 const computerSelection = getComputerChoice()
 
-playRound(computerSelection, humanSelection)
+// playRound(computerSelection, humanSelection)
+
+
+
+function game() {
+    for (let i = 0; i < 5; i++) {
+    let result = playRound(computerSelection,humanSelection);
+    if (result === "human") {
+        humanScore++;
+        playRound(computerSelection,humanSelection);
+    } else if (result === "computer") {
+        computerScore++
+        playRound(computerSelection,humanSelection);
+    }
+    }
+}
+
+game()
 
 console.log("Human Score: " + humanScore)
 console.log("Computer Score: " + computerScore)
