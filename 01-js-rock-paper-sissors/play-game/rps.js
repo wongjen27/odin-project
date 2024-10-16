@@ -39,8 +39,11 @@ function getHumanChoice() {
 
 //**************** SCORE KEEPING ****************//
 
-let humanScore = 0;
-let computerScore = 0;
+
+    let humanScore = 0;
+    let computerScore = 0;
+
+
 
 function playRound(computerChoice, humanChoice) {
     if (computerChoice === "rock") {
@@ -79,30 +82,12 @@ function playRound(computerChoice, humanChoice) {
 
 }
 
+
+
 const humanSelection = getHumanChoice()
 const computerSelection = getComputerChoice()
 
-console.log(playRound(computerSelection, humanSelection))
+playRound(computerSelection, humanSelection)
 
 console.log("Human Score: " + humanScore)
 console.log("Computer Score: " + computerScore)
-
-
-
-
-// function test(computer, human) {
-//     if (computer === "Rock") {
-//         if (human === "Paper") {
-//             humanScore = humanScore + 1;
-//             return "Paper beats rock. You get a point!"
-//         }
-//     }
-// };
-
-// const computer = getComputerChoice
-
-// console.log(test("Rock", "Paper"))
-// console.log(humanScore)
-// console.log(test("Rock", "Paper"))
-// console.log(humanScore)
-// console.log(computerScore)
