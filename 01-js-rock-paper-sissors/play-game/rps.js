@@ -27,12 +27,11 @@ let getComputerChoice = () => {
 function getHumanChoice() {
     let choice = prompt("Rock, paper, or scissors?");
     choice = choice.toLowerCase();
-    if (choice === "rock") {
-        return "rock"
-    } else if (choice === "paper") {
-        return "paper"
-    } else if (choice === "scissors") {
-        return "scissors"
+    if (["rock", "paper", "scissors"].includes(choice)) {
+        return choice;
+    } else {
+        console.log("Invalid choice. Please try again.");
+        return getHumanChoice();
     }
 }
 
@@ -40,8 +39,8 @@ function getHumanChoice() {
 //**************** SCORE KEEPING ****************//
 
 
-    let humanScore = 0;
-    let computerScore = 0;
+let humanScore = 0;
+let computerScore = 0;
 
 
 
@@ -87,27 +86,31 @@ function playRound(computerChoice, humanChoice) {
 
 
 
-const humanSelection = getHumanChoice()
-const computerSelection = getComputerChoice()
+function game(num) {
+    const humanSelection = getHumanChoice()
+    const computerSelection = getComputerChoice()
 
-// playRound(computerSelection, humanSelection)
-
-
-
-function game() {
-    for (let i = 0; i < 5; i++) {
     let result = playRound(computerSelection,humanSelection);
+
+    if (num <= 0) {
+        if (humanScore === computerScore) {
+            console.log("Game over. It is a tie.")
+        } else if (humanScore > computerScore) {
+            console.log("Game over. You win!")
+        } else if (computerScore < humanScore) {
+            console.log("Game over. You lose.")
+        }
+        return;
+    }
     if (result === "human") {
         humanScore++;
-        playRound(computerSelection,humanSelection);
     } else if (result === "computer") {
         computerScore++
-        playRound(computerSelection,humanSelection);
     }
-    }
+    console.log("Curent human Score: " + humanScore)
+    console.log("Curent computer Score: " + computerScore)
+
+    game(num - 1)
 }
 
-game()
-
-console.log("Human Score: " + humanScore)
-console.log("Computer Score: " + computerScore)
+game(5)
